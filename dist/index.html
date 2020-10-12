@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="/favicon.ico">
+  <title>Ирвас окна</title>
+  <!-- Fonts -->
+  <style>
+    body {
+      box-sizing: border-box;
+    }
+
+    input:focus {
+      outline: none;
+    }
+
+    .wrapper {
+      margin-top: 200px;
+      overflow: visible;
+    }
+
+    .cellLetters:first-child {
+      margin-left: 36px;
+
+    }
+
+    .cellLetters {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      min-width: 82px;
+
+      min-height: 30px;
+      border-bottom: 1px solid #aaa;
+      border-left: 1px solid #aaa;
+      border-right: 1px solid #aaa;
+      position: relative;
+      flex-basis: 100px;
+
+    }
+
+    /* .rowLetters .cellLetters{
+        width: 100px;
+      }
+      */
+
+
+
+    .cellLetters span {
+      position: absolute;
+      right: -6px;
+      bottom: 0;
+      height: 30px;
+      width: 10px;
+      cursor: col-resize;
+    }
+
+    .rowLetters {
+      display: flex;
+
+    }
+
+    .cellNumbers {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      min-width: 25px;
+      min-height: 30px;
+      border-bottom: 1px solid #aaa;
+      border-top: 1px solid #aaa;
+      border-right: 1px solid #aaa;
+      word-wrap: break-word;
+      position: relative;
+
+    }
+
+    .cellNumbers span {
+      position: absolute;
+      left: 0;
+      bottom: -4px;
+      width: 36px;
+      height: 7px;
+      cursor: row-resize;
+    }
+
+    .rowNumbers {
+
+      margin-top: -29px;
+      float: left;
+    }
+
+    .button-all {
+      width: 36px;
+      height: 28px;
+      background: #fff;
+      border: none;
+      cursor: pointer;
+    }
+
+    .button-all svg {
+      width: 25px;
+      height: 24px;
+    }
+
+    .button-all:focus {
+      outline: none;
+    }
+
+    .row {
+      display: flex;
+    }
+
+    .edit {
+      border: 1px solid #aaa;
+
+    }
+
+    .edit:focus {
+      /* удаление обводки фокуса в Safari */
+      outline: none;
+    }
+
+    .cell {
+      min-width: 82px;
+      min-height: 30px;
+      border: 1px solid #aaa;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      transition: 0.1s;
+    }
+
+    .active {
+      border: 1px solid #272029;
+      box-shadow: inset 2px 2px 5px rgba(114, 108, 103, 0.5), 1px 1px 5px #fff;
+    }
+
+    .table-editing {
+      position: fixed;
+      top: 5px;
+      left: 5px;
+      width: 100%;
+      height: 200px;
+      background-color: rgba(255, 255, 255, 0.2);
+
+    }
+
+    .render-table {
+      border: none;
+      background-color: #fff;
+    }
+
+    .selectCell {
+      border: 1px solid rgb(56, 138, 2);
+      background-color: #e1e1e1;
+    }
+  </style>
+
+  <link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<body>
+  <div class="wrapper"></div>
+
+  <div class="table-editing">
+    <button class="render-table" data-render="render-table">загрузить</button>
+
+    <div class="change-font">
+      <!-- <div class="time-machine">
+        <button class="time-button back"></button>
+        <button class="time-button forward"></button>
+      </div> -->
+      <div>
+        <select class="size-font" name="" id="">
+          <option value="8">8</option>
+          <option value="10">10</option>
+          <option value="12">12</option>
+          <option value="14">14</option>
+          <option selected="selected" value="16">16</option>
+          <option value="18">18</option>
+          <option value="22">22</option>
+          <option value="24">24</option>
+          <option value="32">32</option>
+          <option value="38">38</option>
+          <option value="44">44</option>
+          <option value="62">62</option>
+          <option value="72">72</option>
+        </select>
+      </div>
+      <div class="table-editing-font">
+        <div class="block">
+          <input type="checkbox" id="bold-font" class="font bold-font" data-style="fontWeight" data-value="bold">
+          <label for="bold-font"><img src="./assets/img/j.svg" alt=""></label>
+        </div>
+        <div class="block">
+          <input type="checkbox" id="italic-font" class="font italic-font" data-style="fontStyle" data-value="italic">
+          <label for="italic-font"><img src="./assets/img/i.svg" alt=""></label>
+        </div>
+        <div class="block">
+          <input type="checkbox" id="underline-font" class="font underline-font" data-style="textDecoration"
+            data-value="underline">
+          <label for="underline-font"><img src="./assets/img/4.svg" alt=""></label>
+        </div>
+      </div>
+      <div>
+        <input class="input-color-background" type="color" id="background" name="head" value="#000">
+        <label for="background">background-color</label>
+      </div>
+      <div>
+        <input class="input-color-text" type="color" id="background" name="head" value="#000">
+        <label for="background">text-color</label>
+      </div>
+      <div class="align-style">
+        <span class="align-text align-text-left" data-style="flex-start"></span>
+        <span class="align-text align-text-center" data-style="center"></span>
+        <span class="align-text align-text-right" data-style="flex-end"></span>
+      </div>
+    </div>
+
+    <div class="input-function">
+      <span class="input-function-button">
+        <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink">
+          <rect width="35" height="35" fill="url(#pattern0)" />
+          <defs>
+            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+              <use xlink:href="#image0" transform="scale(0.01)" />
+            </pattern>
+            <image id="image0" width="100" height="100"
+              xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAEVklEQVR4Ae2du6sUMRTGP5+IjdhYiJWCoJ2FWFgKdr7whbV/hKCdjQ/sRP8An9iItaWFIFho41sRbARBEC0sfB7YuYk5SUzm5szs3v0GlnvyOkl+35zM7N6dDcCDBEiABEiABEiABEiABEiABEiABEiABEiABEiABEiABDoCqwEcB3ALwAsA3wD8XuIvmaPMVeZ8DIAwmIrjMIC3Sxx+ycn1BsChMRVZAeAShVArwUUAy8cQhmKkl+ULQwsiy1RJGM9znYNDiSIXL1kv5xl2ydzfDXWhl7upkgGxDnB0iCi5TUGKT8gbQwjyioIUCyLvU8yPrxSkWBBhZX7w2lB3DaUgUxbBFISC1IXwvC15jBBGCCMkF/WMEEYII4QRMmVRQEEoiLs05c4Glunl25EzsghdQ88xMZLBuc11zjItliNnZBG6hp5jYiSDc5vrnGVaLEfOyCJ0DT3HxEgG5zbXOcu0WI6ckUXoGnqOiZEMzm2uc5ZpsRw5I4vQNfQcEyMZnNtc5yzTYjlyRhaha+g5JkYyOLe5zlmmxXLkjCxC19BzTIxkcG5znbNMi+XIGVmErqHnmBjJ4NzmOmeZFsuRM7IIXUPPMTGSwbnNdc4yLZYjZ2QtFvrryaPEVwFcAfBshv4/3mfuRjI4t30GJW2+Azji3CxYlynIAoteRl9BziZ6oyAJMKXZfQXZFXSwAcBOAHcYIQGZymRfQTZ5/ciD9R+XuBAdJ2/aNmbXUe3ftd5wxK5p/x7AfQD3ADwF8LOyfU1fret607Yxawb8GcDmyWuZNxyxu/zuFyGeAFjvvU4D+ABgHwC/rbjZMhGnZixj1fWmbWPWTOxTwRDOTM72x0HdkwC2Bnl+Upa9uzMQKf6YTewaQfwIkR+r6Y5YhISCrOwqA1gHYI2X7kwRrGY8Y9Ttxmr2t++kNnojil1DQkGk+g7vjaO8jznl+ehMWdb6jmmIdt04zf72nUStIBJF8uC9398PAHK77B+Pgjp+/Wmw/bGa2H0nWSvI9gTo3cGsHiTq9R1n63bBcNsn+w64VpC9CdB7gilRkASo/wlVK4jc7sZ8UpDgjIxBKsmjIAHIVskS+LE6FKSVAoGfGOySPAoSgGyVLIEfq0NBWikQ+InBLsmjIAHIVskS+LE6FKSVAoGfGOySvG3eJ7kiTtgm/LT3RKSOtDng+ZFPhx8m6oX+x0oH+Nonx5rYrPbbXoHA46yCGWvcAb72Sf4Ipl5uU2J/aY9fe3w55Wt2Cs4Y+c81vvY5NymIuiFJiX2tPX7tUTYvSQ2A+f+yiX0xUBNdZM4qAPJ1UMLPM5BNbgbbdUd2kqEgaQa/AOxf5Ilf3Vx2kqEocQbnqmk2aCBfw5GdZCiKYyCRcX6sLY86TWUnGV5TANk1Qj7WmYpDLvSyeYnslyH33vPw5lHmKM+2XJ88ZiEMeJAACZAACZAACZAACZAACZAACZAACZAACZAACZAACZDAXwJ/AJJOEGCztYEwAAAAAElFTkSuQmCC" />
+          </defs>
+        </svg>
+
+      </span>
+      <input class="alin" type="text">
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>

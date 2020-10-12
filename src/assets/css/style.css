@@ -1,0 +1,112 @@
+.change-font {
+    display: flex;
+    align-items: center;
+
+    
+}
+.table-editing-font {
+    display: flex;
+    align-items: center;
+    border: 1px solid #eee;
+    padding: 5px;
+}
+.bold-font,.italic-font,.underline-font {
+    display: none;
+   
+}
+.bold-font + label {
+  
+    cursor: pointer;
+}
+.italic-font + label {
+    
+    cursor: pointer;
+}
+
+.underline-font + label {
+    
+    cursor: pointer;
+}
+
+
+
+.block {
+    
+    display: flex;
+    justify-content: center;
+    min-width: 20px;
+    min-height: 20px;
+    
+}
+.block:hover {
+    background-color: #eee;
+}
+
+
+.edit {
+    border: 1px solid #004A8B;
+}
+.alin {
+    width: 100%;
+}
+.input-function {
+    display: flex;
+    margin-top: 10px;
+}
+.input-function-button {
+    background: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.input-function-button:focus {
+    outline: none;
+}
+
+.time-machine {
+    display: flex;
+    flex-direction: column  ;
+    margin: 0 15px;
+}
+.time-button {
+    width: 17px;
+    height: 17px;
+    background: #fff;
+    border: none;
+    cursor: pointer;
+}
+.align-style {
+    display: flex;
+    align-items: center;
+}
+
+.align-style span  {
+    cursor: pointer;
+    display: flex;
+    margin-left: 7px;
+}
+.align-style span:hover {
+    background-color: #eee;
+}
+
+.align-text-left {
+    width: 17px;
+    height: 17px;
+    background: url(../img/left.svg) no-repeat center;
+}
+.align-text-center {
+    width: 17px;
+    height: 17px;
+    background: url(../img/center.svg) no-repeat center;
+}
+.align-text-right {
+    width: 17px;
+    height: 17px;
+    background: url(../img/right.svg) no-repeat center;
+}
+.back { 
+    background: url(../img/timeLeft.svg) no-repeat center;
+}
+.forward {
+    background: url(../img/timeRight.svg) no-repeat center;
+}
